@@ -1,11 +1,13 @@
-# api documentation for  [promise (v7.1.1)](https://github.com/then/promise)  [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-promise.svg)](https://travis-ci.org/npmdoc/node-npmdoc-promise)
+# api documentation for  [promise (v7.1.1)](https://github.com/then/promise)  [![npm package](https://img.shields.io/npm/v/npmdoc-promise.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-promise) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-promise.svg)](https://travis-ci.org/npmdoc/node-npmdoc-promise)
 #### Bare bones Promises/A+ implementation
 
 [![NPM](https://nodei.co/npm/promise.png?downloads=true)](https://www.npmjs.com/package/promise)
 
-[![apidoc](https://npmdoc.github.io/node-npmdoc-promise/build/screen-capture.buildNpmdoc.browser._2Fhome_2Ftravis_2Fbuild_2Fnpmdoc_2Fnode-npmdoc-promise_2Ftmp_2Fbuild_2Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-promise/build..beta..travis-ci.org/apidoc.html)
+[![apidoc](https://npmdoc.github.io/node-npmdoc-promise/build/screenCapture.buildNpmdoc.browser._2Fhome_2Ftravis_2Fbuild_2Fnpmdoc_2Fnode-npmdoc-promise_2Ftmp_2Fbuild_2Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-promise/build/apidoc.html)
 
-![package-listing](https://npmdoc.github.io/node-npmdoc-promise/build/screen-capture.npmPackageListing.svg)
+![npmPackageListing](https://npmdoc.github.io/node-npmdoc-promise/build/screenCapture.npmPackageListing.svg)
+
+![npmPackageDependencyTree](https://npmdoc.github.io/node-npmdoc-promise/build/screenCapture.npmPackageDependencyTree.svg)
 
 
 
@@ -81,6 +83,7 @@
 #### [module promise](#apidoc.module.promise)
 1.  [function <span class="apidocSignatureSpan">promise.</span>_61 ()](#apidoc.element.promise._61)
 1.  [function <span class="apidocSignatureSpan">promise.</span>all (arr)](#apidoc.element.promise.all)
+1.  [function <span class="apidocSignatureSpan">promise.</span>core (fn)](#apidoc.element.promise.core)
 1.  [function <span class="apidocSignatureSpan">promise.</span>denodeify (fn, argumentCount)](#apidoc.element.promise.denodeify)
 1.  [function <span class="apidocSignatureSpan">promise.</span>disableSynchronous ()](#apidoc.element.promise.disableSynchronous)
 1.  [function <span class="apidocSignatureSpan">promise.</span>enableSynchronous ()](#apidoc.element.promise.enableSynchronous)
@@ -90,7 +93,29 @@
 1.  [function <span class="apidocSignatureSpan">promise.</span>resolve (value)](#apidoc.element.promise.resolve)
 1.  object <span class="apidocSignatureSpan">promise.</span>_10
 1.  object <span class="apidocSignatureSpan">promise.</span>_97
+1.  object <span class="apidocSignatureSpan">promise.</span>core.prototype
 1.  object <span class="apidocSignatureSpan">promise.</span>rejection_tracking
+
+#### [module promise.core](#apidoc.module.promise.core)
+1.  [function <span class="apidocSignatureSpan">promise.</span>core (fn)](#apidoc.element.promise.core.core)
+1.  [function <span class="apidocSignatureSpan">promise.core.</span>_61 ()](#apidoc.element.promise.core._61)
+1.  [function <span class="apidocSignatureSpan">promise.core.</span>all (arr)](#apidoc.element.promise.core.all)
+1.  [function <span class="apidocSignatureSpan">promise.core.</span>denodeify (fn, argumentCount)](#apidoc.element.promise.core.denodeify)
+1.  [function <span class="apidocSignatureSpan">promise.core.</span>disableSynchronous ()](#apidoc.element.promise.core.disableSynchronous)
+1.  [function <span class="apidocSignatureSpan">promise.core.</span>enableSynchronous ()](#apidoc.element.promise.core.enableSynchronous)
+1.  [function <span class="apidocSignatureSpan">promise.core.</span>nodeify (fn)](#apidoc.element.promise.core.nodeify)
+1.  [function <span class="apidocSignatureSpan">promise.core.</span>race (values)](#apidoc.element.promise.core.race)
+1.  [function <span class="apidocSignatureSpan">promise.core.</span>reject (value)](#apidoc.element.promise.core.reject)
+1.  [function <span class="apidocSignatureSpan">promise.core.</span>resolve (value)](#apidoc.element.promise.core.resolve)
+1.  object <span class="apidocSignatureSpan">promise.core.</span>_10
+1.  object <span class="apidocSignatureSpan">promise.core.</span>_97
+
+#### [module promise.core.prototype](#apidoc.module.promise.core.prototype)
+1.  [function <span class="apidocSignatureSpan">promise.core.prototype.</span>catch (onRejected)](#apidoc.element.promise.core.prototype.catch)
+1.  [function <span class="apidocSignatureSpan">promise.core.prototype.</span>done (onFulfilled, onRejected)](#apidoc.element.promise.core.prototype.done)
+1.  [function <span class="apidocSignatureSpan">promise.core.prototype.</span>finally (f)](#apidoc.element.promise.core.prototype.finally)
+1.  [function <span class="apidocSignatureSpan">promise.core.prototype.</span>nodeify (callback, ctx)](#apidoc.element.promise.core.prototype.nodeify)
+1.  [function <span class="apidocSignatureSpan">promise.core.prototype.</span>then (onFulfilled, onRejected)](#apidoc.element.promise.core.prototype.then)
 
 #### [module promise.rejection_tracking](#apidoc.module.promise.rejection_tracking)
 1.  [function <span class="apidocSignatureSpan">promise.rejection_tracking.</span>disable ()](#apidoc.element.promise.rejection_tracking.disable)
@@ -175,6 +200,29 @@ Promise.all([Promise.resolve('a'), 'b', Promise.resolve('c')])
 .then(function (res) {
   assert(res[0] === 'a')
 ...
+```
+
+#### <a name="apidoc.element.promise.core"></a>[function <span class="apidocSignatureSpan">promise.</span>core (fn)](#apidoc.element.promise.core)
+- description and source-code
+```javascript
+function Promise(fn) {
+  if (typeof this !== 'object') {
+    throw new TypeError('Promises must be constructed via new');
+  }
+  if (typeof fn !== 'function') {
+    throw new TypeError('not a function');
+  }
+  this._45 = 0;
+  this._81 = 0;
+  this._65 = null;
+  this._54 = null;
+  if (fn === noop) return;
+  doResolve(fn, this);
+}
+```
+- example usage
+```shell
+n/a
 ```
 
 #### <a name="apidoc.element.promise.denodeify"></a>[function <span class="apidocSignatureSpan">promise.</span>denodeify (fn, argumentCount)](#apidoc.element.promise.denodeify)
@@ -427,6 +475,489 @@ Converts values and foreign promises into Promises/A+ promises.  If you pass it 
  the state of 'value' (rejected or fulfilled).
 
 #### Promise.reject(value)
+...
+```
+
+
+
+# <a name="apidoc.module.promise.core"></a>[module promise.core](#apidoc.module.promise.core)
+
+#### <a name="apidoc.element.promise.core.core"></a>[function <span class="apidocSignatureSpan">promise.</span>core (fn)](#apidoc.element.promise.core.core)
+- description and source-code
+```javascript
+function Promise(fn) {
+  if (typeof this !== 'object') {
+    throw new TypeError('Promises must be constructed via new');
+  }
+  if (typeof fn !== 'function') {
+    throw new TypeError('not a function');
+  }
+  this._45 = 0;
+  this._81 = 0;
+  this._65 = null;
+  this._54 = null;
+  if (fn === noop) return;
+  doResolve(fn, this);
+}
+```
+- example usage
+```shell
+n/a
+```
+
+#### <a name="apidoc.element.promise.core._61"></a>[function <span class="apidocSignatureSpan">promise.core.</span>_61 ()](#apidoc.element.promise.core._61)
+- description and source-code
+```javascript
+function noop() {}
+```
+- example usage
+```shell
+n/a
+```
+
+#### <a name="apidoc.element.promise.core.all"></a>[function <span class="apidocSignatureSpan">promise.core.</span>all (arr)](#apidoc.element.promise.core.all)
+- description and source-code
+```javascript
+all = function (arr) {
+  var args = Array.prototype.slice.call(arr);
+
+  return new Promise(function (resolve, reject) {
+    if (args.length === 0) return resolve([]);
+    var remaining = args.length;
+    function res(i, val) {
+      if (val && (typeof val === 'object' || typeof val === 'function')) {
+        if (val instanceof Promise && val.then === Promise.prototype.then) {
+          while (val._81 === 3) {
+            val = val._65;
+          }
+          if (val._81 === 1) return res(i, val._65);
+          if (val._81 === 2) reject(val._65);
+          val.then(function (val) {
+            res(i, val);
+          }, reject);
+          return;
+        } else {
+          var then = val.then;
+          if (typeof then === 'function') {
+            var p = new Promise(then.bind(val));
+            p.then(function (val) {
+              res(i, val);
+            }, reject);
+            return;
+          }
+        }
+      }
+      args[i] = val;
+      if (--remaining === 0) {
+        resolve(args);
+      }
+    }
+    for (var i = 0; i < args.length; i++) {
+      res(i, args[i]);
+    }
+  });
+}
+```
+- example usage
+```shell
+...
+
+Converts values and foreign promises into Promises/A+ promises.  If you pass it a value then it returns a Promise for that value
+.  If you pass it something that is close to a promise (such as a jQuery attempt at a promise) it returns a Promise that takes on
+ the state of 'value' (rejected or fulfilled).
+
+#### Promise.reject(value)
+
+Returns a rejected promise with the given value.
+
+#### Promise.all(array)
+
+Returns a promise for an array.  If it is called with a single argument that 'Array.isArray' then this returns a promise for a copy
+ of that array with any promises replaced by their fulfilled values.  e.g.
+
+'''js
+Promise.all([Promise.resolve('a'), 'b', Promise.resolve('c')])
+.then(function (res) {
+  assert(res[0] === 'a')
+...
+```
+
+#### <a name="apidoc.element.promise.core.denodeify"></a>[function <span class="apidocSignatureSpan">promise.core.</span>denodeify (fn, argumentCount)](#apidoc.element.promise.core.denodeify)
+- description and source-code
+```javascript
+denodeify = function (fn, argumentCount) {
+  if (
+    typeof argumentCount === 'number' && argumentCount !== Infinity
+  ) {
+    return denodeifyWithCount(fn, argumentCount);
+  } else {
+    return denodeifyWithoutCount(fn);
+  }
+}
+```
+- example usage
+```shell
+...
+  .then(function (res) {
+    assert(res[0] === 'a')
+    assert(res[1] === 'b')
+    assert(res[2] === 'c')
+  })
+'''
+
+#### Promise.denodeify(fn)
+
+_Non Standard_
+
+Takes a function which accepts a node style callback and returns a new function that returns a promise instead.
+
+e.g.
+...
+```
+
+#### <a name="apidoc.element.promise.core.disableSynchronous"></a>[function <span class="apidocSignatureSpan">promise.core.</span>disableSynchronous ()](#apidoc.element.promise.core.disableSynchronous)
+- description and source-code
+```javascript
+disableSynchronous = function () {
+  Promise.prototype.isPending = undefined;
+  Promise.prototype.isFulfilled = undefined;
+  Promise.prototype.isRejected = undefined;
+  Promise.prototype.getValue = undefined;
+  Promise.prototype.getReason = undefined;
+  Promise.prototype.getState = undefined;
+}
+```
+- example usage
+```shell
+n/a
+```
+
+#### <a name="apidoc.element.promise.core.enableSynchronous"></a>[function <span class="apidocSignatureSpan">promise.core.</span>enableSynchronous ()](#apidoc.element.promise.core.enableSynchronous)
+- description and source-code
+```javascript
+enableSynchronous = function () {
+  Promise.prototype.isPending = function() {
+    return this.getState() == 0;
+  };
+
+  Promise.prototype.isFulfilled = function() {
+    return this.getState() == 1;
+  };
+
+  Promise.prototype.isRejected = function() {
+    return this.getState() == 2;
+  };
+
+  Promise.prototype.getValue = function () {
+    if (this._81 === 3) {
+      return this._65.getValue();
+    }
+
+    if (!this.isFulfilled()) {
+      throw new Error('Cannot get a value of an unfulfilled promise.');
+    }
+
+    return this._65;
+  };
+
+  Promise.prototype.getReason = function () {
+    if (this._81 === 3) {
+      return this._65.getReason();
+    }
+
+    if (!this.isRejected()) {
+      throw new Error('Cannot get a rejection reason of a non-rejected promise.');
+    }
+
+    return this._65;
+  };
+
+  Promise.prototype.getState = function () {
+    if (this._81 === 3) {
+      return this._65.getState();
+    }
+    if (this._81 === -1 || this._81 === -2) {
+      return 0;
+    }
+
+    return this._81;
+  };
+}
+```
+- example usage
+```shell
+n/a
+```
+
+#### <a name="apidoc.element.promise.core.nodeify"></a>[function <span class="apidocSignatureSpan">promise.core.</span>nodeify (fn)](#apidoc.element.promise.core.nodeify)
+- description and source-code
+```javascript
+nodeify = function (fn) {
+  return function () {
+    var args = Array.prototype.slice.call(arguments);
+    var callback =
+      typeof args[args.length - 1] === 'function' ? args.pop() : null;
+    var ctx = this;
+    try {
+      return fn.apply(this, arguments).nodeify(callback, ctx);
+    } catch (ex) {
+      if (callback === null || typeof callback == 'undefined') {
+        return new Promise(function (resolve, reject) {
+          reject(ex);
+        });
+      } else {
+        asap(function () {
+          callback.call(ctx, ex);
+        })
+      }
+    }
+  }
+}
+```
+- example usage
+```shell
+...
+
+var p = read('foo.json', 'utf8')
+  .then(function (str) {
+    return write('foo.json', JSON.stringify(JSON.parse(str), null, '  '), 'utf8')
+  })
+'''
+
+#### Promise.nodeify(fn)
+
+_Non Standard_
+
+The twin to 'denodeify' is useful when you want to export an API that can be used by people who haven't learnt about the brilliance
+ of promises yet.
+
+'''javascript
+module.exports = Promise.nodeify(awesomeAPI)
+...
+```
+
+#### <a name="apidoc.element.promise.core.race"></a>[function <span class="apidocSignatureSpan">promise.core.</span>race (values)](#apidoc.element.promise.core.race)
+- description and source-code
+```javascript
+race = function (values) {
+  return new Promise(function (resolve, reject) {
+    values.forEach(function(value){
+      Promise.resolve(value).then(resolve, reject);
+    });
+  });
+}
+```
+- example usage
+```shell
+n/a
+```
+
+#### <a name="apidoc.element.promise.core.reject"></a>[function <span class="apidocSignatureSpan">promise.core.</span>reject (value)](#apidoc.element.promise.core.reject)
+- description and source-code
+```javascript
+reject = function (value) {
+  return new Promise(function (resolve, reject) {
+    reject(value);
+  });
+}
+```
+- example usage
+```shell
+...
+
+#### Promise.resolve(value)
+
+(deprecated aliases: 'Promise.from(value)', 'Promise.cast(value)')
+
+Converts values and foreign promises into Promises/A+ promises.  If you pass it a value then it returns a Promise for that value
+.  If you pass it something that is close to a promise (such as a jQuery attempt at a promise) it returns a Promise that takes on
+ the state of 'value' (rejected or fulfilled).
+
+#### Promise.reject(value)
+
+Returns a rejected promise with the given value.
+
+#### Promise.all(array)
+
+Returns a promise for an array.  If it is called with a single argument that 'Array.isArray' then this returns a promise for a copy
+ of that array with any promises replaced by their fulfilled values.  e.g.
+...
+```
+
+#### <a name="apidoc.element.promise.core.resolve"></a>[function <span class="apidocSignatureSpan">promise.core.</span>resolve (value)](#apidoc.element.promise.core.resolve)
+- description and source-code
+```javascript
+resolve = function (value) {
+  if (value instanceof Promise) return value;
+
+  if (value === null) return NULL;
+  if (value === undefined) return UNDEFINED;
+  if (value === true) return TRUE;
+  if (value === false) return FALSE;
+  if (value === 0) return ZERO;
+  if (value === '') return EMPTYSTRING;
+
+  if (typeof value === 'object' || typeof value === 'function') {
+    try {
+      var then = value.then;
+      if (typeof then === 'function') {
+        return new Promise(then.bind(value));
+      }
+    } catch (ex) {
+      return new Promise(function (resolve, reject) {
+        reject(ex);
+      });
+    }
+  }
+  return valuePromise(value);
+}
+```
+- example usage
+```shell
+...
+ 1. 'resolve' should be called with a single argument.  If it is called with a non-promise value then the promise is fulfilled with
+ that value.  If it is called with a promise (A) then the returned promise takes on the state of that new promise (A).
+ 2. 'reject' should be called with a single argument.  The returned promise will be rejected with that argument.
+
+### Static Functions
+
+  These methods are invoked by calling 'Promise.methodName'.
+
+#### Promise.resolve(value)
+
+(deprecated aliases: 'Promise.from(value)', 'Promise.cast(value)')
+
+Converts values and foreign promises into Promises/A+ promises.  If you pass it a value then it returns a Promise for that value
+.  If you pass it something that is close to a promise (such as a jQuery attempt at a promise) it returns a Promise that takes on
+ the state of 'value' (rejected or fulfilled).
+
+#### Promise.reject(value)
+...
+```
+
+
+
+# <a name="apidoc.module.promise.core.prototype"></a>[module promise.core.prototype](#apidoc.module.promise.core.prototype)
+
+#### <a name="apidoc.element.promise.core.prototype.catch"></a>[function <span class="apidocSignatureSpan">promise.core.prototype.</span>catch (onRejected)](#apidoc.element.promise.core.prototype.catch)
+- description and source-code
+```javascript
+catch = function (onRejected) {
+  return this.then(null, onRejected);
+}
+```
+- example usage
+```shell
+n/a
+```
+
+#### <a name="apidoc.element.promise.core.prototype.done"></a>[function <span class="apidocSignatureSpan">promise.core.prototype.</span>done (onFulfilled, onRejected)](#apidoc.element.promise.core.prototype.done)
+- description and source-code
+```javascript
+done = function (onFulfilled, onRejected) {
+  var self = arguments.length ? this.then.apply(this, arguments) : this;
+  self.then(null, function (err) {
+    setTimeout(function () {
+      throw err;
+    }, 0);
+  });
+}
+```
+- example usage
+```shell
+n/a
+```
+
+#### <a name="apidoc.element.promise.core.prototype.finally"></a>[function <span class="apidocSignatureSpan">promise.core.prototype.</span>finally (f)](#apidoc.element.promise.core.prototype.finally)
+- description and source-code
+```javascript
+finally = function (f) {
+  return this.then(function (value) {
+    return Promise.resolve(f()).then(function () {
+      return value;
+    });
+  }, function (err) {
+    return Promise.resolve(f()).then(function () {
+      throw err;
+    });
+  });
+}
+```
+- example usage
+```shell
+n/a
+```
+
+#### <a name="apidoc.element.promise.core.prototype.nodeify"></a>[function <span class="apidocSignatureSpan">promise.core.prototype.</span>nodeify (callback, ctx)](#apidoc.element.promise.core.prototype.nodeify)
+- description and source-code
+```javascript
+nodeify = function (callback, ctx) {
+  if (typeof callback != 'function') return this;
+
+  this.then(function (value) {
+    asap(function () {
+      callback.call(ctx, null, value);
+    });
+  }, function (err) {
+    asap(function () {
+      callback.call(ctx, err);
+    });
+  });
+}
+```
+- example usage
+```shell
+...
+
+var p = read('foo.json', 'utf8')
+  .then(function (str) {
+    return write('foo.json', JSON.stringify(JSON.parse(str), null, '  '), 'utf8')
+  })
+'''
+
+#### Promise.nodeify(fn)
+
+_Non Standard_
+
+The twin to 'denodeify' is useful when you want to export an API that can be used by people who haven't learnt about the brilliance
+ of promises yet.
+
+'''javascript
+module.exports = Promise.nodeify(awesomeAPI)
+...
+```
+
+#### <a name="apidoc.element.promise.core.prototype.then"></a>[function <span class="apidocSignatureSpan">promise.core.prototype.</span>then (onFulfilled, onRejected)](#apidoc.element.promise.core.prototype.then)
+- description and source-code
+```javascript
+then = function (onFulfilled, onRejected) {
+  if (this.constructor !== Promise) {
+    return safeThen(this, onFulfilled, onRejected);
+  }
+  var res = new Promise(noop);
+  handle(this, new Handler(onFulfilled, onRejected, res));
+  return res;
+}
+```
+- example usage
+```shell
+...
+
+#### Promise.all(array)
+
+Returns a promise for an array.  If it is called with a single argument that 'Array.isArray' then this returns a promise for a copy
+ of that array with any promises replaced by their fulfilled values.  e.g.
+
+'''js
+Promise.all([Promise.resolve('a'), 'b', Promise.resolve('c')])
+  .then(function (res) {
+    assert(res[0] === 'a')
+    assert(res[1] === 'b')
+    assert(res[2] === 'c')
+  })
+'''
+
+#### Promise.denodeify(fn)
 ...
 ```
 
