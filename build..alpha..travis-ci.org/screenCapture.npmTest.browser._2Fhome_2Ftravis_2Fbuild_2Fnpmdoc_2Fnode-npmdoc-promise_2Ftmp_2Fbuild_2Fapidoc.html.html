@@ -1,4 +1,4 @@
-<div class="apidocDiv">
+<html><head></head><body><div class="apidocDiv">
 <style>
 /*csslint
 */
@@ -47,17 +47,10 @@
 }
 </style>
 <h1>api documentation for
-    <a
-
-        href="https://github.com/then/promise"
-
-    >promise (v7.1.1)</a>
+    <a href="https://github.com/then/promise">promise (v7.1.1)</a>
 </h1>
 <h4>Bare bones Promises/A+ implementation</h4>
-<div class="apidocSectionDiv"><a
-    href="#apidoc.tableOfContents"
-    id="apidoc.tableOfContents"
-><h1>table of contents</h1></a><ol>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
 
     <li class="apidocModuleLi"><a href="#apidoc.module.promise">module promise</a><ol>
 
@@ -387,8 +380,8 @@
     if (args.length === 0) return resolve([]);
     var remaining = args.length;
     function res(i, val) {
-      if (val &#x26;&#x26; (typeof val === &#x27;object&#x27; || typeof val === &#x27;function&#x27;)) {
-        if (val instanceof Promise &#x26;&#x26; val.then === Promise.prototype.then) {
+      if (val &amp;&amp; (typeof val === 'object' || typeof val === 'function')) {
+        if (val instanceof Promise &amp;&amp; val.then === Promise.prototype.then) {
           while (val._81 === 3) {
             val = val._65;
           }
@@ -400,7 +393,7 @@
           return;
         } else {
           var then = val.then;
-          if (typeof then === &#x27;function&#x27;) {
+          if (typeof then === 'function') {
             var p = new Promise(then.bind(val));
             p.then(function (val) {
               res(i, val);
@@ -414,7 +407,7 @@
         resolve(args);
       }
     }
-    for (var i = 0; i &#x3c; args.length; i++) {
+    for (var i = 0; i &lt; args.length; i++) {
       res(i, args[i]);
     }
   });
@@ -435,9 +428,9 @@ Returns a promise for an array.  If it is called with a single argument that `Ar
  of that array with any promises replaced by their fulfilled values.  e.g.
 
 ```js
-Promise.all([Promise.resolve(&#x27;a&#x27;), &#x27;b&#x27;, Promise.resolve(&#x27;c&#x27;)])
+Promise.all([Promise.resolve('a'), 'b', Promise.resolve('c')])
 .then(function (res) {
-  assert(res[0] === &#x27;a&#x27;)
+  assert(res[0] === 'a')
 ...</pre></li>
     </ul>
 
@@ -451,11 +444,11 @@ Promise.all([Promise.resolve(&#x27;a&#x27;), &#x27;b&#x27;, Promise.resolve(&#x2
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function Promise(fn) {
-  if (typeof this !== &#x27;object&#x27;) {
-    throw new TypeError(&#x27;Promises must be constructed via new&#x27;);
+  if (typeof this !== 'object') {
+    throw new TypeError('Promises must be constructed via new');
   }
-  if (typeof fn !== &#x27;function&#x27;) {
-    throw new TypeError(&#x27;not a function&#x27;);
+  if (typeof fn !== 'function') {
+    throw new TypeError('not a function');
   }
   this._45 = 0;
   this._81 = 0;
@@ -478,7 +471,7 @@ Promise.all([Promise.resolve(&#x27;a&#x27;), &#x27;b&#x27;, Promise.resolve(&#x2
     <ul>
     <li>description and source-code<pre class="apidocCodePre">denodeify = function (fn, argumentCount) {
   if (
-    typeof argumentCount === &#x27;number&#x27; &#x26;&#x26; argumentCount !== Infinity
+    typeof argumentCount === 'number' &amp;&amp; argumentCount !== Infinity
   ) {
     return denodeifyWithCount(fn, argumentCount);
   } else {
@@ -487,9 +480,9 @@ Promise.all([Promise.resolve(&#x27;a&#x27;), &#x27;b&#x27;, Promise.resolve(&#x2
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
   .then(function (res) {
-    assert(res[0] === &#x27;a&#x27;)
-    assert(res[1] === &#x27;b&#x27;)
-    assert(res[2] === &#x27;c&#x27;)
+    assert(res[0] === 'a')
+    assert(res[1] === 'b')
+    assert(res[2] === 'c')
   })
 ```
 
@@ -551,7 +544,7 @@ e.g.
     }
 
     if (!this.isFulfilled()) {
-      throw new Error(&#x27;Cannot get a value of an unfulfilled promise.&#x27;);
+      throw new Error('Cannot get a value of an unfulfilled promise.');
     }
 
     return this._65;
@@ -563,7 +556,7 @@ e.g.
     }
 
     if (!this.isRejected()) {
-      throw new Error(&#x27;Cannot get a rejection reason of a non-rejected promise.&#x27;);
+      throw new Error('Cannot get a rejection reason of a non-rejected promise.');
     }
 
     return this._65;
@@ -596,12 +589,12 @@ e.g.
   return function () {
     var args = Array.prototype.slice.call(arguments);
     var callback =
-      typeof args[args.length - 1] === &#x27;function&#x27; ? args.pop() : null;
+      typeof args[args.length - 1] === 'function' ? args.pop() : null;
     var ctx = this;
     try {
       return fn.apply(this, arguments).nodeify(callback, ctx);
     } catch (ex) {
-      if (callback === null || typeof callback == &#x27;undefined&#x27;) {
+      if (callback === null || typeof callback == 'undefined') {
         return new Promise(function (resolve, reject) {
           reject(ex);
         });
@@ -615,9 +608,9 @@ e.g.
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 
-var p = read(&#x27;foo.json&#x27;, &#x27;utf8&#x27;)
+var p = read('foo.json', 'utf8')
   .then(function (str) {
-    return write(&#x27;foo.json&#x27;, JSON.stringify(JSON.parse(str), null, &#x27;  &#x27;), &#x27;utf8&#x27;)
+    return write('foo.json', JSON.stringify(JSON.parse(str), null, '  '), 'utf8')
   })
 ```
 
@@ -625,7 +618,7 @@ var p = read(&#x27;foo.json&#x27;, &#x27;utf8&#x27;)
 
 _Non Standard_
 
-The twin to `denodeify` is useful when you want to export an API that can be used by people who haven&#x27;t learnt about the brilliance
+The twin to `denodeify` is useful when you want to export an API that can be used by people who haven't learnt about the brilliance
  of promises yet.
 
 ```javascript
@@ -704,12 +697,12 @@ Returns a promise for an array.  If it is called with a single argument that `Ar
   if (value === true) return TRUE;
   if (value === false) return FALSE;
   if (value === 0) return ZERO;
-  if (value === &#x27;&#x27;) return EMPTYSTRING;
+  if (value === '') return EMPTYSTRING;
 
-  if (typeof value === &#x27;object&#x27; || typeof value === &#x27;function&#x27;) {
+  if (typeof value === 'object' || typeof value === 'function') {
     try {
       var then = value.then;
-      if (typeof then === &#x27;function&#x27;) {
+      if (typeof then === 'function') {
         return new Promise(then.bind(value));
       }
     } catch (ex) {
@@ -764,11 +757,11 @@ Converts values and foreign promises into Promises/A+ promises.  If you pass it 
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function Promise(fn) {
-  if (typeof this !== &#x27;object&#x27;) {
-    throw new TypeError(&#x27;Promises must be constructed via new&#x27;);
+  if (typeof this !== 'object') {
+    throw new TypeError('Promises must be constructed via new');
   }
-  if (typeof fn !== &#x27;function&#x27;) {
-    throw new TypeError(&#x27;not a function&#x27;);
+  if (typeof fn !== 'function') {
+    throw new TypeError('not a function');
   }
   this._45 = 0;
   this._81 = 0;
@@ -809,8 +802,8 @@ Converts values and foreign promises into Promises/A+ promises.  If you pass it 
     if (args.length === 0) return resolve([]);
     var remaining = args.length;
     function res(i, val) {
-      if (val &#x26;&#x26; (typeof val === &#x27;object&#x27; || typeof val === &#x27;function&#x27;)) {
-        if (val instanceof Promise &#x26;&#x26; val.then === Promise.prototype.then) {
+      if (val &amp;&amp; (typeof val === 'object' || typeof val === 'function')) {
+        if (val instanceof Promise &amp;&amp; val.then === Promise.prototype.then) {
           while (val._81 === 3) {
             val = val._65;
           }
@@ -822,7 +815,7 @@ Converts values and foreign promises into Promises/A+ promises.  If you pass it 
           return;
         } else {
           var then = val.then;
-          if (typeof then === &#x27;function&#x27;) {
+          if (typeof then === 'function') {
             var p = new Promise(then.bind(val));
             p.then(function (val) {
               res(i, val);
@@ -836,7 +829,7 @@ Converts values and foreign promises into Promises/A+ promises.  If you pass it 
         resolve(args);
       }
     }
-    for (var i = 0; i &#x3c; args.length; i++) {
+    for (var i = 0; i &lt; args.length; i++) {
       res(i, args[i]);
     }
   });
@@ -857,9 +850,9 @@ Returns a promise for an array.  If it is called with a single argument that `Ar
  of that array with any promises replaced by their fulfilled values.  e.g.
 
 ```js
-Promise.all([Promise.resolve(&#x27;a&#x27;), &#x27;b&#x27;, Promise.resolve(&#x27;c&#x27;)])
+Promise.all([Promise.resolve('a'), 'b', Promise.resolve('c')])
 .then(function (res) {
-  assert(res[0] === &#x27;a&#x27;)
+  assert(res[0] === 'a')
 ...</pre></li>
     </ul>
 
@@ -874,7 +867,7 @@ Promise.all([Promise.resolve(&#x27;a&#x27;), &#x27;b&#x27;, Promise.resolve(&#x2
     <ul>
     <li>description and source-code<pre class="apidocCodePre">denodeify = function (fn, argumentCount) {
   if (
-    typeof argumentCount === &#x27;number&#x27; &#x26;&#x26; argumentCount !== Infinity
+    typeof argumentCount === 'number' &amp;&amp; argumentCount !== Infinity
   ) {
     return denodeifyWithCount(fn, argumentCount);
   } else {
@@ -883,9 +876,9 @@ Promise.all([Promise.resolve(&#x27;a&#x27;), &#x27;b&#x27;, Promise.resolve(&#x2
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
   .then(function (res) {
-    assert(res[0] === &#x27;a&#x27;)
-    assert(res[1] === &#x27;b&#x27;)
-    assert(res[2] === &#x27;c&#x27;)
+    assert(res[0] === 'a')
+    assert(res[1] === 'b')
+    assert(res[2] === 'c')
   })
 ```
 
@@ -947,7 +940,7 @@ e.g.
     }
 
     if (!this.isFulfilled()) {
-      throw new Error(&#x27;Cannot get a value of an unfulfilled promise.&#x27;);
+      throw new Error('Cannot get a value of an unfulfilled promise.');
     }
 
     return this._65;
@@ -959,7 +952,7 @@ e.g.
     }
 
     if (!this.isRejected()) {
-      throw new Error(&#x27;Cannot get a rejection reason of a non-rejected promise.&#x27;);
+      throw new Error('Cannot get a rejection reason of a non-rejected promise.');
     }
 
     return this._65;
@@ -992,12 +985,12 @@ e.g.
   return function () {
     var args = Array.prototype.slice.call(arguments);
     var callback =
-      typeof args[args.length - 1] === &#x27;function&#x27; ? args.pop() : null;
+      typeof args[args.length - 1] === 'function' ? args.pop() : null;
     var ctx = this;
     try {
       return fn.apply(this, arguments).nodeify(callback, ctx);
     } catch (ex) {
-      if (callback === null || typeof callback == &#x27;undefined&#x27;) {
+      if (callback === null || typeof callback == 'undefined') {
         return new Promise(function (resolve, reject) {
           reject(ex);
         });
@@ -1011,9 +1004,9 @@ e.g.
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 
-var p = read(&#x27;foo.json&#x27;, &#x27;utf8&#x27;)
+var p = read('foo.json', 'utf8')
   .then(function (str) {
-    return write(&#x27;foo.json&#x27;, JSON.stringify(JSON.parse(str), null, &#x27;  &#x27;), &#x27;utf8&#x27;)
+    return write('foo.json', JSON.stringify(JSON.parse(str), null, '  '), 'utf8')
   })
 ```
 
@@ -1021,7 +1014,7 @@ var p = read(&#x27;foo.json&#x27;, &#x27;utf8&#x27;)
 
 _Non Standard_
 
-The twin to `denodeify` is useful when you want to export an API that can be used by people who haven&#x27;t learnt about the brilliance
+The twin to `denodeify` is useful when you want to export an API that can be used by people who haven't learnt about the brilliance
  of promises yet.
 
 ```javascript
@@ -1100,12 +1093,12 @@ Returns a promise for an array.  If it is called with a single argument that `Ar
   if (value === true) return TRUE;
   if (value === false) return FALSE;
   if (value === 0) return ZERO;
-  if (value === &#x27;&#x27;) return EMPTYSTRING;
+  if (value === '') return EMPTYSTRING;
 
-  if (typeof value === &#x27;object&#x27; || typeof value === &#x27;function&#x27;) {
+  if (typeof value === 'object' || typeof value === 'function') {
     try {
       var then = value.then;
-      if (typeof then === &#x27;function&#x27;) {
+      if (typeof then === 'function') {
         return new Promise(then.bind(value));
       }
     } catch (ex) {
@@ -1214,7 +1207,7 @@ Converts values and foreign promises into Promises/A+ promises.  If you pass it 
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">nodeify = function (callback, ctx) {
-  if (typeof callback != &#x27;function&#x27;) return this;
+  if (typeof callback != 'function') return this;
 
   this.then(function (value) {
     asap(function () {
@@ -1228,9 +1221,9 @@ Converts values and foreign promises into Promises/A+ promises.  If you pass it 
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 
-var p = read(&#x27;foo.json&#x27;, &#x27;utf8&#x27;)
+var p = read('foo.json', 'utf8')
   .then(function (str) {
-    return write(&#x27;foo.json&#x27;, JSON.stringify(JSON.parse(str), null, &#x27;  &#x27;), &#x27;utf8&#x27;)
+    return write('foo.json', JSON.stringify(JSON.parse(str), null, '  '), 'utf8')
   })
 ```
 
@@ -1238,7 +1231,7 @@ var p = read(&#x27;foo.json&#x27;, &#x27;utf8&#x27;)
 
 _Non Standard_
 
-The twin to `denodeify` is useful when you want to export an API that can be used by people who haven&#x27;t learnt about the brilliance
+The twin to `denodeify` is useful when you want to export an API that can be used by people who haven't learnt about the brilliance
  of promises yet.
 
 ```javascript
@@ -1271,11 +1264,11 @@ Returns a promise for an array.  If it is called with a single argument that `Ar
  of that array with any promises replaced by their fulfilled values.  e.g.
 
 ```js
-Promise.all([Promise.resolve(&#x27;a&#x27;), &#x27;b&#x27;, Promise.resolve(&#x27;c&#x27;)])
+Promise.all([Promise.resolve('a'), 'b', Promise.resolve('c')])
   .<span class="apidocCodeKeywordSpan">then</span>(function (res) {
-    assert(res[0] === &#x27;a&#x27;)
-    assert(res[1] === &#x27;b&#x27;)
-    assert(res[2] === &#x27;c&#x27;)
+    assert(res[0] === 'a')
+    assert(res[1] === 'b')
+    assert(res[2] === 'c')
   })
 ```
 
@@ -1323,7 +1316,7 @@ Promise.all([Promise.resolve(&#x27;a&#x27;), &#x27;b&#x27;, Promise.resolve(&#x2
   var rejections = {};
   Promise._10 = function (promise) {
     if (
-      promise._81 === 2 &#x26;&#x26; // IS REJECTED
+      promise._81 === 2 &amp;&amp; // IS REJECTED
       rejections[promise._72]
     ) {
       if (rejections[promise._72].logged) {
@@ -1384,11 +1377,11 @@ Promise.all([Promise.resolve(&#x27;a&#x27;), &#x27;b&#x27;, Promise.resolve(&#x2
         options.onHandled(rejections[id].displayId, rejections[id].error);
       } else if (!rejections[id].onUnhandled) {
         console.warn(
-          &#x27;Promise Rejection Handled (id: &#x27; + rejections[id].displayId + &#x27;):&#x27;
+          'Promise Rejection Handled (id: ' + rejections[id].displayId + '):'
         );
         console.warn(
-          &#x27;  This means you can ignore any previous messages of the form &#x22;Possible Unhandled Promise Rejection&#x22; with id &#x27; +
-          rejections[id].displayId + &#x27;.&#x27;
+          '  This means you can ignore any previous messages of the form "Possible Unhandled Promise Rejection" with id ' +
+          rejections[id].displayId + '.'
         );
       }
     }
@@ -1402,7 +1395,7 @@ By default, promises silence any unhandled rejections.
 You can enable logging of unhandled ReferenceErrors and TypeErrors via:
 
 ```js
-require(&#x27;promise/lib/rejection-tracking&#x27;).<span class="apidocCodeKeywordSpan">enable</span>();
+require('promise/lib/rejection-tracking').<span class="apidocCodeKeywordSpan">enable</span>();
 ```
 
 Due to the performance cost, you should only do this during development.
@@ -1422,3 +1415,4 @@ You can enable logging of all unhandled rejections if you need to debug an excep
     ]
 </div>
 </div>
+</body></html>
